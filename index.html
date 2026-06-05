@@ -3,63 +3,138 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 .w{width:100%;height:690px;position:relative;overflow:hidden;border-radius:18px;font-family:'Nunito',sans-serif;}
 
-/* ===== ФОН: многослойный, живой, со светом ===== */
+/* ===== ФОН: светлый, сияющий, с переливами ===== */
 .bg{
-  position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 80% 60% at 20% 30%, rgba(160,100,255,0.28) 0%, transparent 55%),
-    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(80,180,255,0.22) 0%, transparent 50%),
-    radial-gradient(ellipse 70% 55% at 65% 80%, rgba(60,220,160,0.18) 0%, transparent 52%),
-    radial-gradient(ellipse 50% 40% at 15% 75%, rgba(255,140,80,0.16) 0%, transparent 48%),
-    radial-gradient(ellipse 90% 80% at 50% 50%, rgba(30,20,80,0.0) 0%, transparent 100%),
-    linear-gradient(145deg, #0e0820 0%, #0a1535 22%, #071e2e 42%, #0b2520 60%, #130e1e 80%, #0e0820 100%);
-  overflow:hidden;
+position:absolute;inset:0;
+background:
+radial-gradient(ellipse 80% 60% at 20% 30%, rgba(64,224,208,0.25) 0%, transparent 55%),
+radial-gradient(ellipse 60% 50% at 80% 20%, rgba(106,90,205,0.20) 0%, transparent 50%),
+radial-gradient(ellipse 70% 55% at 65% 80%, rgba(80,200,120,0.18) 0%, transparent 52%),
+radial-gradient(ellipse 50% 40% at 15% 75%, rgba(255,215,0,0.15) 0%, transparent 48%),
+radial-gradient(ellipse 90% 80% at 50% 50%, rgba(0,127,255,0.12) 0%, transparent 100%),
+linear-gradient(145deg, #e8f0ff 0%, #f0e6ff 22%, #e6fff5 42%, #fff5e6 60%, #f5e6ff 80%, #e6f0ff 100%);
+overflow:hidden;
 }
+
 /* Медленно вращающееся сияние */
 .bg::before{
-  content:'';position:absolute;
-  inset:-60%;width:220%;height:220%;
-  background:conic-gradient(
-    from 0deg at 45% 48%,
-    rgba(140,70,230,0.22) 0deg,
-    rgba(50,150,255,0.26) 55deg,
-    rgba(30,220,180,0.20) 110deg,
-    rgba(100,230,80,0.10) 165deg,
-    rgba(255,180,40,0.14) 210deg,
-    rgba(255,80,140,0.18) 265deg,
-    rgba(140,70,230,0.22) 360deg
-  );
-  animation:bgSpin 24s linear infinite;
-  filter:blur(40px);
-  opacity:0.85;
+content:'';position:absolute;
+inset:-60%;width:220%;height:220%;
+background:conic-gradient(
+from 0deg at 45% 48%,
+rgba(64,224,208,0.18) 0deg,
+rgba(0,127,255,0.22) 55deg,
+rgba(80,200,120,0.16) 110deg,
+rgba(255,215,0,0.12) 165deg,
+rgba(230,230,250,0.20) 210deg,
+rgba(106,90,205,0.18) 265deg,
+rgba(64,224,208,0.18) 360deg
+);
+animation:bgSpin 28s linear infinite;
+filter:blur(30px);
+opacity:0.7;
 }
+
 /* Пульсирующие цветные пятна поверх */
 .bg::after{
-  content:'';position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 55% 35% at 28% 35%, rgba(180,120,255,0.20) 0%, transparent 100%),
-    radial-gradient(ellipse 45% 30% at 72% 25%, rgba(80,200,255,0.16) 0%, transparent 100%),
-    radial-gradient(ellipse 40% 28% at 60% 78%, rgba(80,230,170,0.14) 0%, transparent 100%),
-    radial-gradient(ellipse 38% 25% at 15% 68%, rgba(255,160,60,0.12) 0%, transparent 100%);
-  animation:bgPulse 9s ease-in-out infinite alternate;
+content:'';position:absolute;inset:0;
+background:
+radial-gradient(ellipse 55% 35% at 28% 35%, rgba(106,90,205,0.15) 0%, transparent 100%),
+radial-gradient(ellipse 45% 30% at 72% 25%, rgba(0,127,255,0.12) 0%, transparent 100%),
+radial-gradient(ellipse 40% 28% at 60% 78%, rgba(80,200,120,0.10) 0%, transparent 100%),
+radial-gradient(ellipse 38% 25% at 15% 68%, rgba(255,215,0,0.08) 0%, transparent 100%);
+animation:bgPulse 10s ease-in-out infinite alternate;
 }
+
 @keyframes bgSpin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
-@keyframes bgPulse{0%{opacity:0.55;}100%{opacity:1.0;}}
+@keyframes bgPulse{0%{opacity:0.5;}100%{opacity:0.9;}}
 
 /* Центральный рассеянный свет */
 .bg-light{
-  position:absolute;inset:0;z-index:1;
-  background:radial-gradient(ellipse 60% 50% at 50% 50%, rgba(220,200,255,0.10) 0%, transparent 65%);
-  pointer-events:none;
+position:absolute;inset:0;z-index:1;
+background:radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,255,255,0.4) 0%, transparent 65%);
+pointer-events:none;
 }
 
-.paths-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;}
+/* ===== ФОРМЫ В ФОНЕ: сердце, крылья, ладони, сферы ===== */
+.bg-shapes{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;}
+
+.shape-container{
+position:absolute;
+opacity:0;
+transition:opacity 2s ease-in-out;
+filter:drop-shadow(0 0 20px rgba(255,215,0,0.3));
+}
+
+.shape-container.active{opacity:1;}
+
+/* Сердце */
+.shape-heart{
+width:280px;height:280px;
+animation:floatHeart 18s ease-in-out infinite;
+}
+.shape-heart svg{width:100%;height:100%;}
+
+/* Крылья */
+.shape-wings{
+width:320px;height:200px;
+animation:floatWings 20s ease-in-out infinite;
+}
+.shape-wings svg{width:100%;height:100%;}
+
+/* Ладони */
+.shape-hands{
+width:260px;height:260px;
+animation:floatHands 16s ease-in-out infinite;
+}
+.shape-hands svg{width:100%;height:100%;}
+
+/* Сфера */
+.shape-sphere{
+width:240px;height:240px;
+animation:floatSphere 22s ease-in-out infinite;
+}
+.shape-sphere svg{width:100%;height:100%;}
+
+@keyframes floatHeart{
+0%,100%{transform:translate(10%,20%) rotate(-5deg) scale(1);}
+50%{transform:translate(15%,25%) rotate(5deg) scale(1.05);}
+}
+@keyframes floatWings{
+0%,100%{transform:translate(60%,15%) rotate(0deg) scale(1);}
+50%{transform:translate(65%,18%) rotate(3deg) scale(1.03);}
+}
+@keyframes floatHands{
+0%,100%{transform:translate(20%,60%) rotate(0deg) scale(1);}
+50%{transform:translate(25%,65%) rotate(-3deg) scale(1.04);}
+}
+@keyframes floatSphere{
+0%,100%{transform:translate(65%,60%) rotate(0deg) scale(1);}
+50%{transform:translate(70%,65%) rotate(5deg) scale(1.06);}
+}
+
+/* Частицы внутри форм */
+.sparkle{
+position:absolute;
+width:4px;height:4px;
+border-radius:50%;
+background:radial-gradient(circle,rgba(255,255,255,0.9),transparent);
+box-shadow:0 0 8px rgba(255,215,0,0.8),0 0 16px rgba(255,215,0,0.4);
+animation:sparkle 3s ease-in-out infinite;
+}
+
+@keyframes sparkle{
+0%,100%{opacity:0.3;transform:scale(0.8);}
+50%{opacity:1;transform:scale(1.2);}
+}
+
+.paths-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;}
 
 .center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;z-index:8;pointer-events:none;width:164px;height:164px;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.center-disc{position:absolute;inset:0;border-radius:50%;background:radial-gradient(ellipse at 50% 40%,rgba(255,252,255,0.13) 0%,rgba(180,140,255,0.08) 55%,transparent 100%);border:1.5px solid rgba(210,180,255,0.45);backdrop-filter:blur(10px);box-shadow:0 0 32px rgba(160,100,255,0.18),inset 0 0 20px rgba(255,255,255,0.04);}
-.c-title{font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:300;color:#f2ecff;letter-spacing:0.04em;line-height:1.1;position:relative;z-index:2;text-shadow:0 0 22px rgba(200,160,255,0.65),0 2px 8px rgba(0,0,0,0.5);}
-.c-sub{font-size:8.5px;color:#b8a0d8;letter-spacing:0.16em;text-transform:uppercase;margin-top:4px;position:relative;z-index:2;}
-.c-tag{font-family:'Cormorant Garamond',serif;font-size:10.5px;font-style:italic;color:#cdb8ee;margin-top:7px;line-height:1.5;position:relative;z-index:2;}
+.center-disc{position:absolute;inset:0;border-radius:50%;background:radial-gradient(ellipse at 50% 40%,rgba(255,255,255,0.3) 0%,rgba(106,90,205,0.15) 55%,transparent 100%);border:1.5px solid rgba(106,90,205,0.35);backdrop-filter:blur(10px);box-shadow:0 0 32px rgba(106,90,205,0.2),inset 0 0 20px rgba(255,255,255,0.1);}
+.c-title{font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:300;color:#4a3a6a;letter-spacing:0.04em;line-height:1.1;position:relative;z-index:2;text-shadow:0 0 22px rgba(106,90,205,0.3),0 2px 8px rgba(255,255,255,0.5);}
+.c-sub{font-size:8.5px;color:#7a6a9a;letter-spacing:0.16em;text-transform:uppercase;margin-top:4px;position:relative;z-index:2;}
+.c-tag{font-family:'Cormorant Garamond',serif;font-size:10.5px;font-style:italic;color:#8a7aaa;margin-top:7px;line-height:1.5;position:relative;z-index:2;}
 .c-heart{color:#ff80c0;font-size:13px;margin-top:5px;position:relative;z-index:2;animation:hbeat 3s ease-in-out infinite;}
 @keyframes hbeat{0%,100%{text-shadow:0 0 8px rgba(255,100,180,0.55);}50%{text-shadow:0 0 20px rgba(255,100,180,1.0),0 0 38px rgba(255,100,180,0.35);}}
 
@@ -69,322 +144,455 @@
 .room-photo{width:100%;height:100%;background-size:cover;background-position:center;transition:filter 0.3s ease;}
 .room-color-layer{position:absolute;inset:0;transition:opacity 0.3s ease;}
 .room:hover .room-color-layer{opacity:0.2!important;}
-.room-label{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:9.5px;font-weight:600;color:#e4d4ff;text-shadow:0 1px 4px rgba(0,0,0,0.85),0 0 10px rgba(160,110,255,0.4);letter-spacing:0.03em;pointer-events:none;}
+.room-label{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:9.5px;font-weight:600;color:#4a3a6a;text-shadow:0 1px 4px rgba(255,255,255,0.85),0 0 10px rgba(106,90,205,0.3);letter-spacing:0.03em;pointer-events:none;}
 .room-glow{position:absolute;inset:-6px;border-radius:inherit;opacity:0;transition:opacity 0.3s;background:radial-gradient(circle,rgba(255,220,120,0.4),transparent 70%);z-index:-1;filter:blur(6px);}
 .room:hover .room-glow{opacity:1;}
 
-.footstep{position:absolute;width:5px;height:8px;border-radius:40% 40% 50% 50%;background:rgba(200,160,255,0.9);pointer-events:none;transform:translate(-50%,-50%);opacity:0;box-shadow:0 0 5px rgba(200,160,255,0.95),0 0 10px rgba(200,160,255,0.45);z-index:6;}
+/* Следы как человеческие стопы */
+.footstep{
+position:absolute;
+width:8px;
+height:14px;
+pointer-events:none;
+transform:translate(-50%,-50%);
+opacity:0;
+z-index:6;
+filter:drop-shadow(0 0 4px rgba(255,215,0,0.8)) drop-shadow(0 0 8px rgba(255,215,0,0.4));
+}
+.footstep svg{width:100%;height:100%;}
 
-.tooltip{position:fixed;background:rgba(18,10,40,0.95);border:1px solid rgba(180,140,255,0.35);border-radius:12px;padding:11px 15px;max-width:210px;z-index:400;box-shadow:0 10px 34px rgba(0,0,0,0.55);pointer-events:none;opacity:0;transition:opacity 0.16s;backdrop-filter:blur(8px);}
+.tooltip{position:fixed;background:rgba(255,255,255,0.95);border:1px solid rgba(106,90,205,0.25);border-radius:12px;padding:11px 15px;max-width:210px;z-index:400;box-shadow:0 10px 34px rgba(106,90,205,0.15);pointer-events:none;opacity:0;transition:opacity 0.16s;backdrop-filter:blur(8px);}
 .tooltip.vis{opacity:1;}
-.tt-head{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:500;color:#e8d8ff;margin-bottom:4px;}
-.tt-body{font-size:11px;color:#b0a0cc;line-height:1.6;}
+.tt-head{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:500;color:#4a3a6a;margin-bottom:4px;}
+.tt-body{font-size:11px;color:#6a5a8a;line-height:1.6;}
 
 /* ===== МОДАЛ с живым фото ===== */
-.modal-bg{position:fixed;inset:0;background:rgba(8,4,20,0.72);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.28s;backdrop-filter:blur(6px);}
+.modal-bg{position:fixed;inset:0;background:rgba(232,240,255,0.72);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.28s;backdrop-filter:blur(6px);}
 .modal-bg.open{opacity:1;pointer-events:all;}
-.modal{background:linear-gradient(160deg,#18102e,#1a1530);border:1px solid rgba(180,140,255,0.25);border-radius:22px;max-width:360px;width:91%;position:relative;overflow:hidden;transform:translateY(18px) scale(0.94);transition:transform 0.28s;box-shadow:0 24px 70px rgba(0,0,0,0.7),0 0 60px rgba(120,80,220,0.12);}
+.modal{background:linear-gradient(160deg,#f8f0ff,#f0e6ff);border:1px solid rgba(106,90,205,0.25);border-radius:22px;max-width:360px;width:91%;position:relative;overflow:hidden;transform:translateY(18px) scale(0.94);transition:transform 0.28s;box-shadow:0 24px 70px rgba(106,90,205,0.15),0 0 60px rgba(106,90,205,0.08);}
 .modal-bg.open .modal{transform:translateY(0) scale(1);}
+
 .modal-hero{
-  width:100%;height:200px;
-  background-size:cover;background-position:center;
-  position:relative;
-  transition:background-image 0.3s;
+width:100%;height:200px;
+background-size:cover;background-position:center;
+position:relative;
+transition:background-image 0.3s;
+filter:blur(1px) brightness(1.05);
+border-radius:60% 40% 30% 70% / 60% 30% 70% 40%;
+animation:morphEdges 12s ease-in-out infinite;
+margin:10px;
+width:calc(100% - 20px);
+height:180px;
 }
+
+@keyframes morphEdges{
+0%,100%{border-radius:60% 40% 30% 70% / 60% 30% 70% 40%;}
+25%{border-radius:40% 60% 50% 50% / 50% 50% 60% 40%;}
+50%{border-radius:30% 60% 70% 40% / 50% 60% 30% 60%;}
+75%{border-radius:50% 40% 60% 50% / 60% 40% 50% 50%;}
+}
+
 .modal-hero::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(18,10,40,0.95) 100%);
+content:'';position:absolute;inset:0;
+background:linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, rgba(240,230,255,0.3) 100%);
+border-radius:inherit;
 }
+
 .modal-body{padding:14px 24px 26px;}
 .modal-ico{font-size:26px;margin-bottom:6px;}
-.modal-tit{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:#e8dcff;margin-bottom:8px;text-shadow:0 0 20px rgba(180,140,255,0.3);}
-.modal-txt{font-size:12.5px;color:#a898c8;line-height:1.8;}
-.modal-close{position:absolute;top:10px;right:12px;background:rgba(30,20,60,0.88);border:1px solid rgba(180,140,255,0.3);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;color:#c0a8e8;cursor:pointer;z-index:10;transition:background 0.18s;}
-.modal-close:hover{background:rgba(80,50,140,0.7);}
+.modal-tit{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:#4a3a6a;margin-bottom:8px;text-shadow:0 0 20px rgba(106,90,205,0.15);}
+.modal-txt{font-size:12.5px;color:#6a5a8a;line-height:1.8;}
+.modal-close{position:absolute;top:10px;right:12px;background:rgba(240,230,255,0.88);border:1px solid rgba(106,90,205,0.2);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;color:#6a5a8a;cursor:pointer;z-index:10;transition:background 0.18s;}
+.modal-close:hover{background:rgba(200,180,240,0.7);}
 
-.legend{position:absolute;bottom:12px;right:14px;font-size:9px;color:#7060a0;line-height:2.1;letter-spacing:0.04em;}
+.legend{position:absolute;bottom:12px;right:14px;font-size:9px;color:#8a7aaa;line-height:2.1;letter-spacing:0.04em;}
 .leg-row{display:flex;align-items:center;gap:5px;justify-content:flex-end;}
-.fs-dot{display:inline-block;width:4px;height:6px;border-radius:40%;background:rgba(200,160,255,0.9);box-shadow:0 0 4px rgba(200,160,255,0.8);}
+.fs-dot{display:inline-block;width:4px;height:6px;border-radius:40%;background:rgba(255,215,0,0.8);box-shadow:0 0 4px rgba(255,215,0,0.6);}
 </style>
 
 <div class="w" id="W">
-  <div class="bg"></div>
-  <div class="bg-light"></div>
-  <svg class="paths-svg" id="SVG" viewBox="0 0 680 690">
-    <defs id="DEFS"></defs>
-  </svg>
-  <div class="center">
-    <div class="center-disc"></div>
-    <div class="c-title">Между<br>Мирами</div>
-    <div class="c-sub">пространство исследования</div>
-    <div class="c-tag">Смотри<br>Сердцем</div>
-    <div class="c-heart">♡</div>
-  </div>
-  <div class="legend">
-    <div class="leg-row"><span class="fs-dot"></span><span class="fs-dot" style="opacity:.5"></span><span class="fs-dot" style="opacity:.2"></span> Следы Пути</div>
-  </div>
+<div class="bg"></div>
+<div class="bg-light"></div>
+
+<!-- Формы в фоне -->
+<div class="bg-shapes" id="BG_SHAPES">
+<!-- Сердце -->
+<div class="shape-container shape-heart" id="shapeHeart">
+<svg viewBox="0 0 100 100">
+<defs>
+<radialGradient id="heartGrad" cx="50%" cy="40%">
+<stop offset="0%" style="stop-color:#ffb3d9;stop-opacity:0.6"/>
+<stop offset="50%" style="stop-color:#ff80c0;stop-opacity:0.3"/>
+<stop offset="100%" style="stop-color:#ff80c0;stop-opacity:0"/>
+</radialGradient>
+</defs>
+<path d="M50,85 C20,65 5,40 5,25 C5,10 20,0 35,10 C42,15 50,22 50,22 C50,22 58,15 65,10 C80,0 95,10 95,25 C95,40 80,65 50,85Z" fill="url(#heartGrad)"/>
+</svg>
+</div>
+
+<!-- Крылья -->
+<div class="shape-container shape-wings" id="shapeWings">
+<svg viewBox="0 0 120 80">
+<defs>
+<radialGradient id="wingsGrad" cx="50%" cy="50%">
+<stop offset="0%" style="stop-color:#b3d9ff;stop-opacity:0.5"/>
+<stop offset="50%" style="stop-color:#80b3ff;stop-opacity:0.25"/>
+<stop offset="100%" style="stop-color:#80b3ff;stop-opacity:0"/>
+</radialGradient>
+</defs>
+<path d="M60,40 C40,20 20,15 10,25 C5,30 8,35 15,38 C25,42 40,45 60,45 C80,45 95,42 105,38 C112,35 115,30 110,25 C100,15 80,20 60,40Z" fill="url(#wingsGrad)"/>
+<path d="M60,40 C40,50 20,55 10,50 C5,47 8,42 15,40 C25,37 40,38 60,40 C80,38 95,37 105,40 C112,42 115,47 110,50 C100,55 80,50 60,40Z" fill="url(#wingsGrad)" opacity="0.7"/>
+</svg>
+</div>
+
+<!-- Ладони -->
+<div class="shape-container shape-hands" id="shapeHands">
+<svg viewBox="0 0 100 100">
+<defs>
+<radialGradient id="handsGrad" cx="50%" cy="50%">
+<stop offset="0%" style="stop-color:#ffd700;stop-opacity:0.5"/>
+<stop offset="50%" style="stop-color:#ffb347;stop-opacity:0.25"/>
+<stop offset="100%" style="stop-color:#ffb347;stop-opacity:0"/>
+</radialGradient>
+</defs>
+<path d="M30,70 C25,60 20,50 22,40 C24,32 30,30 35,32 C38,34 40,38 42,42 C44,38 46,34 49,32 C52,30 56,32 58,40 C60,50 55,60 50,70 C45,75 35,75 30,70Z" fill="url(#handsGrad)"/>
+<path d="M70,70 C75,60 80,50 78,40 C76,32 70,30 65,32 C62,34 60,38 58,42 C56,38 54,34 51,32 C48,30 44,32 42,40 C40,50 45,60 50,70 C55,75 65,75 70,70Z" fill="url(#handsGrad)"/>
+</svg>
+</div>
+
+<!-- Сфера -->
+<div class="shape-container shape-sphere" id="shapeSphere">
+<svg viewBox="0 0 100 100">
+<defs>
+<radialGradient id="sphereGrad" cx="40%" cy="35%">
+<stop offset="0%" style="stop-color:#e6e6fa;stop-opacity:0.7"/>
+<stop offset="40%" style="stop-color:#b3b3ff;stop-opacity:0.3"/>
+<stop offset="100%" style="stop-color:#6a5acd;stop-opacity:0"/>
+</radialGradient>
+</defs>
+<circle cx="50" cy="50" r="40" fill="url(#sphereGrad)"/>
+<ellipse cx="38" cy="38" rx="15" ry="12" fill="rgba(255,255,255,0.4)"/>
+</svg>
+</div>
+</div>
+
+<svg class="paths-svg" id="SVG" viewBox="0 0 680 690">
+<defs id="DEFS"></defs>
+</svg>
+
+<div class="center">
+<div class="center-disc"></div>
+<div class="c-title">Между<br>Мирами</div>
+<div class="c-sub">пространство исследования</div>
+<div class="c-tag">Смотри<br>Сердцем</div>
+<div class="c-heart">♡</div>
+</div>
+
+<div class="legend">
+<div class="leg-row"><span class="fs-dot"></span><span class="fs-dot" style="opacity:.5"></span><span class="fs-dot" style="opacity:.2"></span> Следы Пути</div>
+</div>
 </div>
 
 <div class="modal-bg" id="MOD">
-  <div class="modal">
-    <button class="modal-close" id="MX">✕</button>
-    <div class="modal-hero" id="MHERO"></div>
-    <div class="modal-body">
-      <div class="modal-ico" id="MICO"></div>
-      <div class="modal-tit" id="MTIT"></div>
-      <div class="modal-txt" id="MTXT"></div>
-    </div>
-  </div>
+<div class="modal">
+<button class="modal-close" id="MX">✕</button>
+<div class="modal-hero" id="MHERO"></div>
+<div class="modal-body">
+<div class="modal-ico" id="MICO"></div>
+<div class="modal-tit" id="MTIT"></div>
+<div class="modal-txt" id="MTXT"></div>
+</div>
+</div>
 </div>
 
 <div class="tooltip" id="TT">
-  <div class="tt-head" id="TH"></div>
-  <div class="tt-body" id="TB"></div>
+<div class="tt-head" id="TH"></div>
+<div class="tt-body" id="TB"></div>
 </div>
 
 <script>
-// Фото через picsum.photos — работает везде без ограничений CORS
-// seed= фиксирует конкретную красивую картинку
 const rooms=[
-  {id:'cafe',icon:'☕',name:'Кофейня',
-   desc:'Виртуальный кофе, истории, тёплый свет.',
-   full:'Место где можно знакомиться, пить виртуальный кофе (чай из трав приветствуется), читать мысли (в основном свои), делиться историями и вдохновляться.',
-   photo:'https://picsum.photos/seed/warmcafe/700/400',
-   px:0.13,py:0.17, w:96,h:96,
-   shape:'M48,4 C68,2 90,18 93,42 C96,62 82,88 60,94 C40,99 8,86 3,62 C-2,38 12,8 48,4Z',
-   bg:'radial-gradient(circle at 40% 60%, #6b3fa0 0%, #9b59b6 35%, #c39bd3 65%, #f5cba7 100%)',
-   color:'rgba(100,30,140,0.45)'
-  },
-  {id:'lib',icon:'📚',name:'Библиотека Мира',
-   desc:'Отражения, глубина, книги что пересобирают.',
-   full:'Виртуальная библиотека с книгами и историями, которые вдохновляют, картинки, которые включают тебя в твою реальность, пересобирают и помогают найти себя.',
-   photo:'https://picsum.photos/seed/library42/700/400',
-   px:0.40,py:0.09, w:102,h:88,
-   shape:'M10,30 C15,8 42,2 65,6 C85,10 102,22 100,44 C98,64 80,86 55,87 C30,88 2,70 4,48 C5,40 7,36 10,30Z',
-   bg:'radial-gradient(circle at 50% 40%, #87ceeb 0%, #4a90d9 30%, #2c5f8a 65%, #1a3a5c 100%)',
-   color:'rgba(20,50,100,0.4)'
-  },
-  {id:'win',icon:'🪟',name:'Окна в Другие Миры',
-   desc:'Шары над улицей, другие небеса.',
-   full:'Место для полёта фантазий, здесь можно увидеть создание и развитие других миров, вступить в контакт с иными цивилизациями и наладить связи.',
-   photo:'https://picsum.photos/seed/cosmos77/700/400',
-   px:0.73,py:0.13, w:98,h:100,
-   shape:'M49,3 C70,1 95,16 96,40 C98,62 86,90 68,97 C52,103 28,95 14,78 C2,62 0,38 8,20 C16,4 32,4 49,3Z',
-   bg:'radial-gradient(circle at 50% 35%, #87ceeb 0%, #5ba3d0 25%, #3a7abf 55%, #1c4a8c 100%)',
-   color:'rgba(30,60,140,0.38)'
-  },
-  {id:'game',icon:'🎲',name:'Игровая Реальности',
-   desc:'Замки, пальмы, лёгкость акробата.',
-   full:'Где так легко поиграть с реальностью? В игровой форме, можно с лёгкостью акробата прыгать с ветки на ветку реальности, расширяя горизонты!',
-   photo:'https://picsum.photos/seed/playful88/700/400',
-   px:0.88,py:0.42, w:94,h:98,
-   shape:'M47,2 C64,0 88,10 93,32 C98,52 90,80 70,92 C52,102 24,96 10,76 C-2,58 0,28 16,14 C28,4 34,3 47,2Z',
-   bg:'radial-gradient(circle at 40% 35%, #f0c060 0%, #e07820 35%, #c04010 65%, #7a1808 100%)',
-   color:'rgba(160,50,10,0.45)'
-  },
-  {id:'vol',icon:'✨',name:'Волонтёры Вечности',
-   desc:'Соединённые руки. Сотворчество.',
-   full:'Где предложить свои идеи для Сотворчества? Конечно же здесь, найди Сотворцов, запускай совместные проекты!',
-   photo:'https://picsum.photos/seed/together55/700/400',
-   px:0.85,py:0.71, w:96,h:92,
-   shape:'M20,10 C38,0 72,2 88,20 C102,36 96,68 78,82 C62,94 30,92 14,76 C0,62 2,26 20,10Z',
-   bg:'radial-gradient(circle at 50% 50%, #ffd700 0%, #daa520 30%, #b8860b 60%, #7a5c00 100%)',
-   color:'rgba(140,90,0,0.42)'
-  },
-  {id:'wish',icon:'🌼',name:'Комната Желаний',
-   desc:'Следы на песке. Космос за порогом.',
-   full:'Мы позволяем Быть всем нашим Желаниям — самым дерзким и смелым, самым простым и приземлённым, самым невероятным и нелогичным — без условий, без оценки!',
-   photo:'https://picsum.photos/seed/stardream/700/400',
-   px:0.63,py:0.90, w:100,h:94,
-   shape:'M50,2 C72,2 96,20 96,46 C96,72 76,92 50,94 C24,92 4,72 4,46 C4,20 28,2 50,2Z',
-   bg:'radial-gradient(circle at 45% 30%, #f5e06a 0%, #e8a020 25%, #c85000 50%, #1a0a40 75%, #050010 100%)',
-   color:'rgba(80,20,120,0.45)'
-  },
-  {id:'sil',icon:'🪐',name:'Комната Тишины',
-   desc:'Закат над озером. Тишина и глубина.',
-   full:'Хочешь побыть одному и помедитировать в тишине — прекрасно, это комната как раз для этого, здесь есть вопросы, глубина Вечности и Тишина.',
-   photo:'https://picsum.photos/seed/silence33/700/400',
-   px:0.37,py:0.91, w:106,h:88,
-   shape:'M8,30 C20,8 50,0 80,6 C102,12 108,32 104,52 C100,70 80,88 52,88 C26,88 2,72 4,50 C5,42 6,36 8,30Z',
-   bg:'radial-gradient(circle at 50% 55%, #c0c8d8 0%, #8090a8 30%, #506070 60%, #303848 100%)',
-   color:'rgba(20,40,70,0.4)'
-  },
-  {id:'gar',icon:'🌿',name:'Сад Возможностей',
-   desc:'Жёлтые цветы в ящиках. Идеи прорастают.',
-   full:'Хочешь посадить какую-то идею и увидеть, что из неё вырастит? Отлично, это то самое место, где будут прорастать идеи, наброски и черновики реальностей...',
-   photo:'https://picsum.photos/seed/garden66/700/400',
-   px:0.13,py:0.82, w:92,h:98,
-   shape:'M46,2 C70,0 90,22 90,50 C90,76 70,98 46,98 C22,98 4,76 4,50 C4,24 22,4 46,2Z',
-   bg:'radial-gradient(circle at 40% 40%, #f5e840 0%, #d4b800 25%, #8a7200 50%, #4a4a10 80%, #2a2c08 100%)',
-   color:'rgba(50,80,10,0.45)'
-  },
-  {id:'mas',icon:'🎨',name:'Мастерская Творца',
-   desc:'Камушки с рисунками. Творец в Потоке.',
-   full:'Здесь можно увидеть различные работы, историю их создания и прикоснуться к Чувствам Творца в Едином Потоке, а также наблюдать процесс создания Нового.',
-   photo:'https://picsum.photos/seed/artflow/700/400',
-   px:0.09,py:0.50, w:94,h:96,
-   shape:'M30,4 C50,0 80,8 90,28 C100,48 90,80 68,92 C48,102 14,94 5,70 C-2,50 4,20 18,10 C22,6 26,5 30,4Z',
-   bg:'radial-gradient(circle at 50% 55%, #d0b090 0%, #a07850 30%, #785030 60%, #4a2810 100%)',
-   color:'rgba(100,50,20,0.45)'
-  }
+{id:'cafe',icon:'☕',name:'Кофейня',
+desc:'Виртуальный кофе, истории, тёплый свет.',
+full:'Место где можно знакомиться, пить виртуальный кофе (чай из трав приветствуется), читать мысли (в основном свои), делиться историями и вдохновляться.',
+photo:'cafe.jpg',
+px:0.13,py:0.17, w:96,h:96,
+shape:'M48,4 C68,2 90,18 93,42 C96,62 82,88 60,94 C40,99 8,86 3,62 C-2,38 12,8 48,4Z',
+bg:'radial-gradient(circle at 40% 60%, #6b3fa0 0%, #9b59b6 35%, #c39bd3 65%, #f5cba7 100%)',
+color:'rgba(100,30,140,0.35)'
+},
+{id:'lib',icon:'📚',name:'Библиотека Мира',
+desc:'Отражения, глубина, книги что пересобирают.',
+full:'Виртуальная библиотека с книгами и историями, которые вдохновляют, картинки, которые включают тебя в твою реальность, пересобирают и помогают найти себя.',
+photo:'lib.jpg',
+px:0.40,py:0.09, w:102,h:88,
+shape:'M10,30 C15,8 42,2 65,6 C85,10 102,22 100,44 C98,64 80,86 55,87 C30,88 2,70 4,48 C5,40 7,36 10,30Z',
+bg:'radial-gradient(circle at 50% 40%, #87ceeb 0%, #4a90d9 30%, #2c5f8a 65%, #1a3a5c 100%)',
+color:'rgba(20,50,100,0.3)'
+},
+{id:'win',icon:'🪟',name:'Окна в Другие Миры',
+desc:'Шары над улицей, другие небеса.',
+full:'Место для полёта фантазий, здесь можно увидеть создание и развитие других миров, вступить в контакт с иными цивилизациями и наладить связи.',
+photo:'win.jpg',
+px:0.73,py:0.13, w:98,h:100,
+shape:'M49,3 C70,1 95,16 96,40 C98,62 86,90 68,97 C52,103 28,95 14,78 C2,62 0,38 8,20 C16,4 32,4 49,3Z',
+bg:'radial-gradient(circle at 50% 35%, #87ceeb 0%, #5ba3d0 25%, #3a7abf 55%, #1c4a8c 100%)',
+color:'rgba(30,60,140,0.28)'
+},
+{id:'game',icon:'🎲',name:'Игровая Реальности',
+desc:'Замки, пальмы, лёгкость акробата.',
+full:'Где так легко поиграть с реальностью? В игровой форме, можно с лёгкостью акробата прыгать с ветки на ветку реальности, расширяя горизонты!',
+photo:'game.jpg',
+px:0.88,py:0.42, w:94,h:98,
+shape:'M47,2 C64,0 88,10 93,32 C98,52 90,80 70,92 C52,102 24,96 10,76 C-2,58 0,28 16,14 C28,4 34,3 47,2Z',
+bg:'radial-gradient(circle at 40% 35%, #f0c060 0%, #e07820 35%, #c04010 65%, #7a1808 100%)',
+color:'rgba(160,50,10,0.35)'
+},
+{id:'vol',icon:'✨',name:'Волонтёры Вечности',
+desc:'Соединённые руки. Сотворчество.',
+full:'Где предложить свои идеи для Сотворчества? Конечно же здесь, найди Сотворцов, запускай совместные проекты!',
+photo:'vol.jpg',
+px:0.85,py:0.71, w:96,h:92,
+shape:'M20,10 C38,0 72,2 88,20 C102,36 96,68 78,82 C62,94 30,92 14,76 C0,62 2,26 20,10Z',
+bg:'radial-gradient(circle at 50% 50%, #ffd700 0%, #daa520 30%, #b8860b 60%, #7a5c00 100%)',
+color:'rgba(140,90,0,0.32)'
+},
+{id:'wish',icon:'🌼',name:'Комната Желаний',
+desc:'Следы на песке. Космос за порогом.',
+full:'Мы позволяем Быть всем нашим Желаниям — самым дерзким и смелым, самым простым и приземлённым, самым невероятным и нелогичным — без условий, без оценки!',
+photo:'wish.jpg',
+px:0.63,py:0.90, w:100,h:94,
+shape:'M50,2 C72,2 96,20 96,46 C96,72 76,92 50,94 C24,92 4,72 4,46 C4,20 28,2 50,2Z',
+bg:'radial-gradient(circle at 45% 30%, #f5e06a 0%, #e8a020 25%, #c85000 50%, #1a0a40 75%, #050010 100%)',
+color:'rgba(80,20,120,0.35)'
+},
+{id:'sil',icon:'🪐',name:'Комната Тишины',
+desc:'Закат над озером. Тишина и глубина.',
+full:'Хочешь побыть одному и помедитировать в тишине — прекрасно, это комната как раз для этого, здесь есть вопросы, глубина Вечности и Тишина.',
+photo:'sil.jpg',
+px:0.37,py:0.91, w:106,h:88,
+shape:'M8,30 C20,8 50,0 80,6 C102,12 108,32 104,52 C100,70 80,88 52,88 C26,88 2,72 4,50 C5,42 6,36 8,30Z',
+bg:'radial-gradient(circle at 50% 55%, #c0c8d8 0%, #8090a8 30%, #506070 60%, #303848 100%)',
+color:'rgba(20,40,70,0.3)'
+},
+{id:'gar',icon:'🌿',name:'Сад Возможностей',
+desc:'Жёлтые цветы в ящиках. Идеи прорастают.',
+full:'Хочешь посадить какую-то идею и увидеть, что из неё вырастит? Отлично, это то самое место, где будут прорастать идеи, наброски и черновики реальностей...',
+photo:'gar.jpg',
+px:0.13,py:0.82, w:92,h:98,
+shape:'M46,2 C70,0 90,22 90,50 C90,76 70,98 46,98 C22,98 4,76 4,50 C4,24 22,4 46,2Z',
+bg:'radial-gradient(circle at 40% 40%, #f5e840 0%, #d4b800 25%, #8a7200 50%, #4a4a10 80%, #2a2c08 100%)',
+color:'rgba(50,80,10,0.35)'
+},
+{id:'mas',icon:'🎨',name:'Мастерская Творца',
+desc:'Камушки с рисунками. Творец в Потоке.',
+full:'Здесь можно увидеть различные работы, историю их создания и прикоснуться к Чувствам Творца в Едином Потоке, а также наблюдать процесс создания Нового.',
+photo:'mas.jpg',
+px:0.09,py:0.50, w:94,h:96,
+shape:'M30,4 C50,0 80,8 90,28 C100,48 90,80 68,92 C48,102 14,94 5,70 C-2,50 4,20 18,10 C22,6 26,5 30,4Z',
+bg:'radial-gradient(circle at 50% 55%, #d0b090 0%, #a07850 30%, #785030 60%, #4a2810 100%)',
+color:'rgba(100,50,20,0.35)'
+}
 ];
 
 let W,ww,wh,cx,cy,fsPool=[];
-
 function rp(r){return{x:r.px*ww,y:r.py*wh};}
 
 function init(){
-  W=document.getElementById('W');
-  ww=W.offsetWidth; wh=W.offsetHeight;
-  cx=ww*0.5; cy=wh*0.5;
-  buildClipPaths();
-  drawPaths();
-  placeRooms();
-  buildFootstepPool();
+W=document.getElementById('W');
+ww=W.offsetWidth; wh=W.offsetHeight;
+cx=ww*0.5; cy=wh*0.5;
+buildClipPaths();
+drawPaths();
+placeRooms();
+buildFootstepPool();
+startShapeRotation();
 }
 
 function buildClipPaths(){
-  const defs=document.getElementById('DEFS');
-  let html='';
-  rooms.forEach(r=>{
-    html+=`<clipPath id="clip-${r.id}"><path d="${r.shape}"/></clipPath>`;
-  });
-  defs.innerHTML=html;
+const defs=document.getElementById('DEFS');
+let html='';
+rooms.forEach(r=>{
+html+=`<clipPath id="clip-${r.id}"><path d="${r.shape}"/></clipPath>`;
+});
+defs.innerHTML=html;
 }
 
 function drawPaths(){
-  const svg=document.getElementById('SVG');
-  svg.setAttribute('viewBox',`0 0 ${ww} ${wh}`);
-  let d='';
-  rooms.forEach(r=>{
-    const p=rp(r);
-    const mx=(cx+p.x)/2,my=(cy+p.y)/2;
-    const dx=(p.y-cy)*0.13,dy=(cx-p.x)*0.13;
-    d+=`<path d="M${cx},${cy} Q${mx+dx},${my+dy} ${p.x},${p.y}" stroke="rgba(180,140,255,0.22)" stroke-width="1.5" fill="none" stroke-dasharray="3,7"/>`;
-  });
-  const existing=svg.innerHTML;
-  svg.innerHTML=existing+d;
+const svg=document.getElementById('SVG');
+svg.setAttribute('viewBox',`0 0 ${ww} ${wh}`);
+let d='';
+rooms.forEach(r=>{
+const p=rp(r);
+const mx=(cx+p.x)/2,my=(cy+p.y)/2;
+const dx=(p.y-cy)*0.13,dy=(cx-p.x)*0.13;
+d+=`<path d="M${cx},${cy} Q${mx+dx},${my+dy} ${p.x},${p.y}" stroke="rgba(106,90,205,0.25)" stroke-width="1.5" fill="none" stroke-dasharray="3,7"/>`;
+});
+const existing=svg.innerHTML;
+svg.innerHTML=existing+d;
 }
 
 function buildFootstepPool(){
-  for(let i=0;i<100;i++){
-    const el=document.createElement('div');
-    el.className='footstep';
-    W.appendChild(el);
-    fsPool.push(el);
-  }
+for(let i=0;i<100;i++){
+const el=document.createElement('div');
+el.className='footstep';
+el.innerHTML=`<svg viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg">
+<path d="M12,2 C10,2 8,4 8,6 C8,8 9,9 10,10 C8,11 6,13 6,16 C6,19 8,22 12,22 C16,22 18,19 18,16 C18,13 16,11 14,10 C15,9 16,8 16,6 C16,4 14,2 12,2Z" 
+fill="rgba(255,215,0,0.85)" 
+stroke="rgba(255,255,255,0.6)" 
+stroke-width="0.5"/>
+<ellipse cx="12" cy="28" rx="8" ry="6" fill="rgba(255,215,0,0.7)" stroke="rgba(255,255,255,0.5)" stroke-width="0.5"/>
+</svg>`;
+W.appendChild(el);
+fsPool.push(el);
+}
 }
 
 const active={};
 function bezier(t,a,b,c){
-  const m=1-t;
-  return{x:m*m*a.x+2*m*t*b.x+t*t*c.x,y:m*m*a.y+2*m*t*b.y+t*t*c.y};
+const m=1-t;
+return{x:m*m*a.x+2*m*t*b.x+t*t*c.x,y:m*m*a.y+2*m*t*b.y+t*t*c.y};
 }
 
 function walkTo(room){
-  if(active[room.id])return;
-  active[room.id]=true;
-  const p=rp(room);
-  const p0={x:cx,y:cy},p1={x:p.x,y:p.y};
-  const mx=(cx+p.x)/2,my=(cy+p.y)/2;
-  const dx=(p.y-cy)*0.13,dy=(cx-p.x)*0.13;
-  const cp={x:mx+dx,y:my+dy};
-  const N=20; const used=[];
-  let i=0;
-  function step(){
-    if(i>=N){
-      setTimeout(()=>{used.forEach(e=>{e.style.opacity='0';});active[room.id]=false;},700);
-      return;
-    }
-    const t=i/(N-1);
-    const pos=bezier(t,p0,cp,p1);
-    const el=fsPool[i%fsPool.length];
-    used.push(el);
-    const side=(i%2===0?-5:5)+(Math.random()-0.5)*3;
-    const rot=(Math.random()-0.5)*25;
-    el.style.cssText=`left:${pos.x+side}px;top:${pos.y}px;transform:translate(-50%,-50%) rotate(${rot}deg);opacity:0;transition:opacity 0.12s ease;`;
-    void el.offsetWidth;
-    el.style.opacity='1';
-    i++;
-    setTimeout(step,i<N/2?38:50);
-  }
-  step();
+if(active[room.id])return;
+active[room.id]=true;
+const p=rp(room);
+const p0={x:cx,y:cy},p1={x:p.x,y:p.y};
+const mx=(cx+p.x)/2,my=(cy+p.y)/2;
+const dx=(p.y-cy)*0.13,dy=(cx-p.x)*0.13;
+const cp={x:mx+dx,y:my+dy};
+const N=20; const used=[];
+let i=0;
+function step(){
+if(i>=N){
+setTimeout(()=>{used.forEach(e=>{e.style.opacity='0';});active[room.id]=false;},700);
+return;
+}
+const t=i/(N-1);
+const pos=bezier(t,p0,cp,p1);
+const el=fsPool[i%fsPool.length];
+used.push(el);
+const side=(i%2===0?-5:5)+(Math.random()-0.5)*3;
+const rot=(Math.random()-0.5)*25;
+el.style.cssText=`left:${pos.x+side}px;top:${pos.y}px;transform:translate(-50%,-50%) rotate(${rot}deg);opacity:0;transition:opacity 0.12s ease;`;
+void el.offsetWidth;
+el.style.opacity='1';
+i++;
+setTimeout(step,i<N/2?38:50);
+}
+step();
 }
 
 function placeRooms(){
-  document.querySelectorAll('.room').forEach(e=>e.remove());
-  rooms.forEach(r=>{
-    const p=rp(r);
-    const el=document.createElement('div');
-    el.className='room';
-    el.style.cssText=`left:${p.x}px;top:${p.y}px;`;
-    el.innerHTML=`
-      <div class="room-clip-wrap" style="width:${r.w}px;height:${r.h}px;position:relative;">
-        <svg width="${r.w}" height="${r.h}" style="position:absolute;inset:0;z-index:0;" viewBox="0 0 ${r.w} ${r.h}">
-          <defs><clipPath id="lc-${r.id}"><path d="${r.shape}"/></clipPath></defs>
-          <g clip-path="url(#lc-${r.id})">
-            <foreignObject width="${r.w}" height="${r.h}">
-              <div xmlns="http://www.w3.org/1999/xhtml" style="width:100%;height:100%;background:${r.bg};"></div>
-            </foreignObject>
-          </g>
-          <g clip-path="url(#lc-${r.id})">
-            <rect width="${r.w}" height="${r.h}" fill="${r.color}"/>
-          </g>
-          <g clip-path="url(#lc-${r.id})">
-            <rect width="${r.w}" height="${r.h}" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="2"/>
-          </g>
-          <g clip-path="url(#lc-${r.id})">
-            <ellipse cx="${r.w*0.35}" cy="${r.h*0.3}" rx="${r.w*0.22}" ry="${r.h*0.16}" fill="rgba(255,255,255,0.10)"/>
-          </g>
-        </svg>
-        <div class="room-glow" style="clip-path:path('${r.shape}');"></div>
-        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:5;pointer-events:none;">
-          <span style="font-size:22px;filter:drop-shadow(0 1px 5px rgba(0,0,0,0.7));">${r.icon}</span>
-          <span style="font-size:9px;font-weight:600;color:#fff;text-align:center;text-shadow:0 1px 6px rgba(0,0,0,0.85);margin-top:3px;padding:0 6px;line-height:1.25;">${r.name}</span>
-        </div>
-      </div>`;
-
-    el.addEventListener('mouseenter',e=>{walkTo(r);showTT(e,r);});
-    el.addEventListener('mousemove',moveTT);
-    el.addEventListener('mouseleave',hideTT);
-    el.addEventListener('click',()=>openMod(r));
-    W.appendChild(el);
-  });
+document.querySelectorAll('.room').forEach(e=>e.remove());
+rooms.forEach(r=>{
+const p=rp(r);
+const el=document.createElement('div');
+el.className='room';
+el.style.cssText=`left:${p.x}px;top:${p.y}px;`;
+el.innerHTML=`
+<div class="room-clip-wrap" style="width:${r.w}px;height:${r.h}px;position:relative;">
+<svg width="${r.w}" height="${r.h}" style="position:absolute;inset:0;z-index:0;" viewBox="0 0 ${r.w} ${r.h}">
+<defs><clipPath id="lc-${r.id}"><path d="${r.shape}"/></clipPath></defs>
+<g clip-path="url(#lc-${r.id})">
+<foreignObject width="${r.w}" height="${r.h}">
+<div xmlns="http://www.w3.org/1999/xhtml" style="width:100%;height:100%;background:${r.bg};"></div>
+</foreignObject>
+</g>
+<g clip-path="url(#lc-${r.id})">
+<rect width="${r.w}" height="${r.h}" fill="${r.color}"/>
+</g>
+<g clip-path="url(#lc-${r.id})">
+<rect width="${r.w}" height="${r.h}" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="2"/>
+</g>
+<g clip-path="url(#lc-${r.id})">
+<ellipse cx="${r.w*0.35}" cy="${r.h*0.3}" rx="${r.w*0.22}" ry="${r.h*0.16}" fill="rgba(255,255,255,0.10)"/>
+</g>
+</svg>
+<div class="room-glow" style="clip-path:path('${r.shape}');"></div>
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:5;pointer-events:none;">
+<span style="font-size:22px;filter:drop-shadow(0 1px 5px rgba(0,0,0,0.3));">${r.icon}</span>
+<span style="font-size:9px;font-weight:600;color:#4a3a6a;text-align:center;text-shadow:0 1px 6px rgba(255,255,255,0.85);margin-top:3px;padding:0 6px;line-height:1.25;">${r.name}</span>
+</div>
+</div>`;
+el.addEventListener('mouseenter',e=>{walkTo(r);showTT(e,r);});
+el.addEventListener('mousemove',moveTT);
+el.addEventListener('mouseleave',hideTT);
+el.addEventListener('click',()=>openMod(r));
+W.appendChild(el);
+});
 }
 
 const tt=document.getElementById('TT');
 function showTT(e,r){
-  document.getElementById('TH').textContent=r.icon+' '+r.name;
-  document.getElementById('TB').textContent=r.desc;
-  tt.classList.add('vis'); moveTT(e);
+document.getElementById('TH').textContent=r.icon+' '+r.name;
+document.getElementById('TB').textContent=r.desc;
+tt.classList.add('vis'); moveTT(e);
 }
 function moveTT(e){
-  let x=e.clientX+14,y=e.clientY-6;
-  if(x+225>window.innerWidth)x=e.clientX-230;
-  if(y+90>window.innerHeight)y=e.clientY-100;
-  tt.style.left=x+'px';tt.style.top=y+'px';
+let x=e.clientX+14,y=e.clientY-6;
+if(x+225>window.innerWidth)x=e.clientX-230;
+if(y+90>window.innerHeight)y=e.clientY-100;
+tt.style.left=x+'px';tt.style.top=y+'px';
 }
 function hideTT(){tt.classList.remove('vis');}
 
 function openMod(r){
-  const hero=document.getElementById('MHERO');
-  // Сначала показываем градиент, пока грузится фото
-  hero.style.background=r.bg;
-  // Загружаем фото
-  if(r.photo){
-    const img=new Image();
-    img.onload=function(){
-      hero.style.background=`url('${r.photo}') center/cover no-repeat`;
-    };
-    img.src=r.photo;
-  }
-  document.getElementById('MICO').textContent=r.icon;
-  document.getElementById('MTIT').textContent=r.name;
-  document.getElementById('MTXT').textContent=r.full;
-  document.getElementById('MOD').classList.add('open');
+const hero=document.getElementById('MHERO');
+hero.style.background=r.bg;
+if(r.photo){
+const img=new Image();
+img.onload=function(){
+hero.style.background=`url('${r.photo}') center/cover no-repeat`;
+};
+img.src=r.photo;
 }
+document.getElementById('MICO').textContent=r.icon;
+document.getElementById('MTIT').textContent=r.name;
+document.getElementById('MTXT').textContent=r.full;
+document.getElementById('MOD').classList.add('open');
+}
+
 document.getElementById('MX').addEventListener('click',()=>document.getElementById('MOD').classList.remove('open'));
 document.getElementById('MOD').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
+
+// Ротация форм в фоне
+function startShapeRotation(){
+const shapes=['shapeHeart','shapeWings','shapeHands','shapeSphere'];
+const durations=[8000,10000,9000,11000];
+let current=0;
+
+function showNext(){
+document.querySelectorAll('.shape-container').forEach(s=>s.classList.remove('active'));
+const el=document.getElementById(shapes[current]);
+el.classList.add('active');
+
+// Добавляем частицы
+addSparkles(el);
+
+current=(current+1)%shapes.length;
+setTimeout(showNext,durations[(current-1+shapes.length)%shapes.length]);
+}
+
+showNext();
+}
+
+function addSparkles(container){
+// Удаляем старые частицы
+container.querySelectorAll('.sparkle').forEach(s=>s.remove());
+
+// Добавляем новые
+for(let i=0;i<8;i++){
+const sparkle=document.createElement('div');
+sparkle.className='sparkle';
+sparkle.style.left=Math.random()*80+10+'%';
+sparkle.style.top=Math.random()*80+10+'%';
+sparkle.style.animationDelay=Math.random()*3+'s';
+sparkle.style.animationDuration=(2+Math.random()*2)+'s';
+container.appendChild(sparkle);
+}
+}
 
 init();
 window.addEventListener('resize',()=>{document.querySelectorAll('.room').forEach(e=>e.remove());init();});
