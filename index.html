@@ -3,16 +3,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Nunito:wght@300;400;500;600&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
 .w{width:100%;height:690px;position:relative;overflow:hidden;border-radius:18px;font-family:'Nunito',sans-serif;}
-.bg{position:absolute;inset:0;background:linear-gradient(150deg,#f7f2e5 0%,#ede4cf 35%,#e4d8bf 65%,#d8ccb0 100%);}
-.bg::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 48% 48%,rgba(255,245,210,0.55) 0%,transparent 62%);}
+.bg{position:absolute;inset:0;background:linear-gradient(135deg,#1a0533 0%,#0d1a3a 20%,#0a2440 38%,#0d3328 55%,#1a2810 70%,#2a1808 85%,#1a0a28 100%);overflow:hidden;}
+.bg::before{content:'';position:absolute;inset:-40%;width:180%;height:180%;background:conic-gradient(from 0deg at 50% 50%,rgba(120,60,200,0.18) 0deg,rgba(60,140,200,0.22) 60deg,rgba(30,200,160,0.18) 120deg,rgba(180,220,80,0.12) 180deg,rgba(220,120,40,0.15) 240deg,rgba(200,60,140,0.18) 300deg,rgba(120,60,200,0.18) 360deg);animation:auroraRotate 18s linear infinite;filter:blur(32px);}
+.bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(100,200,255,0.12) 0%,transparent 50%),radial-gradient(ellipse at 70% 60%,rgba(200,100,255,0.10) 0%,transparent 50%),radial-gradient(ellipse at 50% 80%,rgba(100,255,180,0.08) 0%,transparent 45%);animation:auroraPulse 8s ease-in-out infinite alternate;}
+@keyframes auroraRotate{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+@keyframes auroraPulse{0%{opacity:0.6;}100%{opacity:1.0;}}
+.bg-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,0) 0%,rgba(0,0,0,0.22) 100%);z-index:1;}
 .paths-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
 
 .center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;z-index:8;pointer-events:none;width:164px;height:164px;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.center-disc{position:absolute;inset:0;border-radius:50%;background:radial-gradient(ellipse,rgba(255,252,240,0.96) 50%,rgba(255,248,225,0.6) 80%,transparent 100%);border:1.5px solid rgba(210,180,110,0.35);}
-.c-title{font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:300;color:#3d2c14;letter-spacing:0.04em;line-height:1.1;position:relative;z-index:2;}
-.c-sub{font-size:8.5px;color:#8a7050;letter-spacing:0.16em;text-transform:uppercase;margin-top:4px;position:relative;z-index:2;}
-.c-tag{font-family:'Cormorant Garamond',serif;font-size:10.5px;font-style:italic;color:#7a6040;margin-top:7px;line-height:1.5;position:relative;z-index:2;}
-.c-heart{color:#c4884a;font-size:13px;margin-top:5px;position:relative;z-index:2;}
+.center-disc{position:absolute;inset:0;border-radius:50%;background:radial-gradient(ellipse,rgba(255,252,240,0.10) 30%,rgba(200,160,255,0.07) 65%,transparent 100%);border:1.5px solid rgba(200,160,255,0.4);backdrop-filter:blur(8px);}
+.c-title{font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:300;color:#f0e8ff;letter-spacing:0.04em;line-height:1.1;position:relative;z-index:2;text-shadow:0 0 20px rgba(200,150,255,0.6);}
+.c-sub{font-size:8.5px;color:#c0a8e0;letter-spacing:0.16em;text-transform:uppercase;margin-top:4px;position:relative;z-index:2;}
+.c-tag{font-family:'Cormorant Garamond',serif;font-size:10.5px;font-style:italic;color:#d0b8f0;margin-top:7px;line-height:1.5;position:relative;z-index:2;}
+.c-heart{color:#ff80c0;font-size:13px;margin-top:5px;position:relative;z-index:2;animation:heartbeat 3s ease-in-out infinite;}
+@keyframes heartbeat{0%,100%{text-shadow:0 0 8px rgba(255,100,180,0.6);}50%{text-shadow:0 0 18px rgba(255,100,180,0.95),0 0 35px rgba(255,100,180,0.4);}}
 
 .room{position:absolute;transform:translate(-50%,-50%);cursor:pointer;z-index:12;transition:transform 0.32s ease;}
 .room:hover{transform:translate(-50%,-50%) scale(1.1);}
@@ -20,7 +25,7 @@
 .room-photo{width:100%;height:100%;background-size:cover;background-position:center;transition:filter 0.3s ease;}
 .room-color-layer{position:absolute;inset:0;transition:opacity 0.3s ease;}
 .room:hover .room-color-layer{opacity:0.25!important;}
-.room-label{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:9.5px;font-weight:600;color:#4a3318;text-shadow:0 1px 4px rgba(255,245,220,0.9),0 0 8px rgba(255,245,220,0.7);letter-spacing:0.03em;pointer-events:none;}
+.room-label{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:9.5px;font-weight:600;color:#e8d8ff;text-shadow:0 1px 4px rgba(0,0,0,0.8),0 0 8px rgba(180,130,255,0.5);letter-spacing:0.03em;pointer-events:none;}
 .room-icon-badge{position:absolute;top:-10px;right:-8px;font-size:16px;line-height:1;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.35));z-index:5;}
 .room-shine{position:absolute;inset:0;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,0.28),transparent 60%);pointer-events:none;z-index:4;}
 .room-glow{position:absolute;inset:-6px;border-radius:inherit;opacity:0;transition:opacity 0.3s;background:radial-gradient(circle,rgba(255,220,100,0.45),transparent 70%);z-index:-1;filter:blur(6px);}
@@ -48,7 +53,7 @@
 .modal-close{position:absolute;top:10px;right:12px;background:rgba(255,252,242,0.92);border:1px solid rgba(170,130,50,0.28);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;color:#6a5030;cursor:pointer;z-index:10;transition:background 0.18s;}
 .modal-close:hover{background:#fff8e8;}
 
-.legend{position:absolute;bottom:12px;right:14px;font-size:9px;color:#9a8060;line-height:2.1;letter-spacing:0.04em;}
+.legend{position:absolute;bottom:12px;right:14px;font-size:9px;color:#9080b8;line-height:2.1;letter-spacing:0.04em;}
 .leg-row{display:flex;align-items:center;gap:5px;justify-content:flex-end;}
 .fs-dot{display:inline-block;width:4px;height:6px;border-radius:40%;background:rgba(230,185,70,0.9);box-shadow:0 0 4px rgba(230,185,70,0.8);}
 </style>
@@ -57,6 +62,7 @@
 
 <div class="w" id="W">
   <div class="bg"></div>
+  <div class="bg-overlay"></div>
   <svg class="paths-svg" id="SVG" viewBox="0 0 680 690">
     <defs id="DEFS"></defs>
   </svg>
@@ -97,6 +103,7 @@ const rooms=[
   {id:'cafe',icon:'☕',name:'Кофейня',
    desc:'Виртуальный кофе, истории, тёплый свет.',
    full:'Место где можно знакомиться, пить виртуальный кофе (чай из трав приветствуется), читать мысли (в основном свои), делиться историями и вдохновляться.',
+   photo:'https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=700&q=80',
    px:0.13,py:0.17, w:96,h:96,
    // форма: мягкий неровный круг, чуть вытянут вверх-вправо
    shape:'M48,4 C68,2 90,18 93,42 C96,62 82,88 60,94 C40,99 8,86 3,62 C-2,38 12,8 48,4Z',
@@ -107,6 +114,7 @@ const rooms=[
   {id:'lib',icon:'📚',name:'Библиотека Мира',
    desc:'Отражения, глубина, книги что пересобирают.',
    full:'Виртуальная библиотека с книгами и историями, которые вдохновляют, картинки, которые включают тебя в твою реальность, пересобирают и помогают найти себя.',
+   photo:'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=700&q=80',
    px:0.40,py:0.09, w:102,h:88,
    // форма: горизонтальный овал с волнистым краем
    shape:'M10,30 C15,8 42,2 65,6 C85,10 102,22 100,44 C98,64 80,86 55,87 C30,88 2,70 4,48 C5,40 7,36 10,30Z',
@@ -117,6 +125,7 @@ const rooms=[
   {id:'win',icon:'🪟',name:'Окна в Другие Миры',
    desc:'Шары над улицей, другие небеса.',
    full:'Место для полёта фантазий, здесь можно увидеть создание и развитие других миров, вступить в контакт с иными цивилизациями и наладить связи.',
+   photo:'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=700&q=80',
    px:0.73,py:0.13, w:98,h:100,
    // форма: вертикальный овал с вмятиной снизу
    shape:'M49,3 C70,1 95,16 96,40 C98,62 86,90 68,97 C52,103 28,95 14,78 C2,62 0,38 8,20 C16,4 32,4 49,3Z',
@@ -127,6 +136,7 @@ const rooms=[
   {id:'game',icon:'🎲',name:'Игровая Реальности',
    desc:'Замки, пальмы, лёгкость акробата.',
    full:'Где так легко поиграть с реальностью? В игровой форме, можно с лёгкостью акробата прыгать с ветки на ветку реальности, расширяя горизонты!',
+   photo:'https://images.unsplash.com/photo-1518972734183-c5cef52856b8?w=700&q=80',
    px:0.88,py:0.42, w:94,h:98,
    // форма: неровный пятиугольник скруглённый
    shape:'M47,2 C64,0 88,10 93,32 C98,52 90,80 70,92 C52,102 24,96 10,76 C-2,58 0,28 16,14 C28,4 34,3 47,2Z',
@@ -137,6 +147,7 @@ const rooms=[
   {id:'vol',icon:'✨',name:'Волонтёры Вечности',
    desc:'Соединённые руки. Сотворчество.',
    full:'Где предложить свои идеи для Сотворчества? Конечно же здесь, найди Сотворцов, запускай совместные проекты!',
+   photo:'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=700&q=80',
    px:0.85,py:0.71, w:96,h:92,
    // форма: овал наклонный
    shape:'M20,10 C38,0 72,2 88,20 C102,36 96,68 78,82 C62,94 30,92 14,76 C0,62 2,26 20,10Z',
@@ -147,6 +158,7 @@ const rooms=[
   {id:'wish',icon:'🌼',name:'Комната Желаний',
    desc:'Следы на песке. Космос за порогом.',
    full:'Мы позволяем Быть всем нашим Желаниям — самым дерзким и смелым, самым простым и приземлённым, самым невероятным и нелогичным — без условий, без оценки!',
+   photo:'https://images.unsplash.com/photo-1462275646964-a0e3386b89fa?w=700&q=80',
    px:0.63,py:0.90, w:100,h:94,
    // форма: капля
    shape:'M50,2 C72,2 96,20 96,46 C96,72 76,92 50,94 C24,92 4,72 4,46 C4,20 28,2 50,2Z',
@@ -157,6 +169,7 @@ const rooms=[
   {id:'sil',icon:'🪐',name:'Комната Тишины',
    desc:'Закат над озером. Тишина и глубина.',
    full:'Хочешь побыть одному и помедитировать в тишине — прекрасно, это комната как раз для этого, здесь есть вопросы, глубина Вечности и Тишина.',
+   photo:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80',
    px:0.37,py:0.91, w:106,h:88,
    // форма: горизонтальный неровный овал — как водная гладь
    shape:'M8,30 C20,8 50,0 80,6 C102,12 108,32 104,52 C100,70 80,88 52,88 C26,88 2,72 4,50 C5,42 6,36 8,30Z',
@@ -167,6 +180,7 @@ const rooms=[
   {id:'gar',icon:'🌿',name:'Сад Возможностей',
    desc:'Жёлтые цветы в ящиках. Идеи прорастают.',
    full:'Хочешь посадить какую-то идею и увидеть, что из неё вырастит? Отлично, это то самое место, где будут прорастать идеи, наброски и черновики реальностей...',
+   photo:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=700&q=80',
    px:0.13,py:0.82, w:92,h:98,
    // форма: листообразная
    shape:'M46,2 C70,0 90,22 90,50 C90,76 70,98 46,98 C22,98 4,76 4,50 C4,24 22,4 46,2Z',
@@ -177,6 +191,7 @@ const rooms=[
   {id:'mas',icon:'🎨',name:'Мастерская Творца',
    desc:'Камушки с рисунками. Творец в Потоке.',
    full:'Здесь можно увидеть различные работы, историю их создания и прикоснуться к Чувствам Творца в Едином Потоке, а также наблюдать процесс создания Нового.',
+   photo:'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=700&q=80',
    px:0.09,py:0.50, w:94,h:96,
    // форма: свободный многоугольник
    shape:'M30,4 C50,0 80,8 90,28 C100,48 90,80 68,92 C48,102 14,94 5,70 C-2,50 4,20 18,10 C22,6 26,5 30,4Z',
@@ -217,7 +232,7 @@ function drawPaths(){
     const p=rp(r);
     const mx=(cx+p.x)/2,my=(cy+p.y)/2;
     const dx=(p.y-cy)*0.13,dy=(cx-p.x)*0.13;
-    d+=`<path d="M${cx},${cy} Q${mx+dx},${my+dy} ${p.x},${p.y}" stroke="rgba(195,160,85,0.2)" stroke-width="1.5" fill="none" stroke-dasharray="3,7"/>`;
+    d+=`<path d="M${cx},${cy} Q${mx+dx},${my+dy} ${p.x},${p.y}" stroke="rgba(180,140,255,0.25)" stroke-width="1.5" fill="none" stroke-dasharray="3,7"/>`;
   });
   // Перезаписать сохранив defs
   const existing=svg.innerHTML;
@@ -326,7 +341,12 @@ function moveTT(e){
 function hideTT(){tt.classList.remove('vis');}
 
 function openMod(r){
-  document.getElementById('MHERO').style.background=r.bg;
+  const hero=document.getElementById('MHERO');
+  if(r.photo){
+    hero.style.background=`url('${r.photo}') center/cover no-repeat`;
+  } else {
+    hero.style.background=r.bg;
+  }
   document.getElementById('MICO').textContent=r.icon;
   document.getElementById('MTIT').textContent=r.name;
   document.getElementById('MTXT').textContent=r.full;
